@@ -41,25 +41,25 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 /api/auth/keycloak/xpto/xpto
 
 ---
-Edit
-/etc/hosts
 
+## Execução local
+Editar `/etc/hosts`, adicionar a linha: <br>
 127.0.0.1 host.docker.internal
 
 ---
-- npm install prisma --save-dev
-- npx prisma generate
-- npx prisma migrate dev
-
----
-- criar client nextjs no keycloak : http://localhost:9000/
-- copiar secret e alterar em .env
-
----
-- subir microserviço em go:
-  - docker compose up -d
-  - docker exec -it chatservice_app bash
-  - go run cmd/chatservice/main.go
-
-- subir esse app:
-  - npm run dev
+- Abrir projeto com devContainer
+  ```sh
+   npm install
+   npx prisma generate
+   npx prisma migrate dev
+  ```
+- Criar client nextjs no keycloak : http://localhost:9000/
+  - Acessar KeyCloak com `admin / admin`
+  - Criar usuário com Client authentication
+  - Informar http://localhost:3000/* em 'Valid redirect URI's' e 'Web origins'
+- Copiar secret na aba Credentials e alterar em .env
+- Iniciar microserviço em go: https://github.com/marcosfalves/chatgpt-service
+- Iniciar esse app:
+  ```sh
+    npm run dev
+  ```
